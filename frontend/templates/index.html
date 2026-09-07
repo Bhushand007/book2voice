@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="converter-page">
+    <header class="app-header">
+        <span class="brand-mark"><i class="bi bi-file-earmark-music"></i></span>
+        <div>
+            <h1>PDF to Voice</h1>
+            <p>Upload a PDF and convert it into an MP3 voice file.</p>
+        </div>
+    </header>
+
+    <section class="converter-card">
+        <div class="upload-zone" id="uploadDropZone">
+            <input type="file" id="fileInput" accept=".pdf" class="d-none">
+            <i class="bi bi-cloud-arrow-up"></i>
+            <h2 id="uploadTitle">Upload PDF</h2>
+            <p id="uploadHint">Drop your PDF here or choose a file.</p>
+            <button class="btn action-btn" id="browseFileBtn" type="button">
+                <i class="bi bi-folder2-open"></i>
+                Choose PDF
+            </button>
+        </div>
+
+        <div class="status-line d-none" id="uploadStatus"></div>
+
+        <div class="stats-row">
+            <span><b id="wordCount">0</b> words</span>
+            <span><b id="charCount">0</b> characters</span>
+            <span><b id="listenEstimate">0.00</b> min</span>
+        </div>
+
+        <div class="settings-grid">
+            <label>
+                <span>Voice</span>
+                <select id="voiceSelect" class="form-select minimalist-input">
+                    <option value="aria">Aria - clear</option>
+                    <option value="jenny">Jenny - warm</option>
+                    <option value="guy">Guy - deep</option>
+                    <option value="ryan">Ryan - British</option>
+                </select>
+            </label>
+
+            <label>
+                <span>Speed <b id="speedValue">1.00x</b></span>
+                <input type="range" min="0.75" max="1.75" value="1.00" step="0.05" id="speedRange" class="form-range">
+            </label>
+        </div>
+
+        <button class="btn convert-btn" id="convertBtn" type="button" disabled>
+            <i class="bi bi-soundwave"></i>
+            Convert PDF to Voice
+        </button>
+
+        <div class="progress-wrap d-none" id="convertProgressWrap">
+            <div class="progress-meta">
+                <span id="convertStepLabel">Preparing...</span>
+                <span id="convertPercent">0%</span>
+            </div>
+            <div class="progress slim-progress">
+                <div id="convertProgressBar" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+            </div>
+        </div>
+
+        <section class="audio-panel d-none" id="audioPanel">
+            <div class="wave-shell">
+                {% for _ in range(24) %}
+                <span class="wave-bar"></span>
+                {% endfor %}
+            </div>
+            <audio id="audioPlayer" controls preload="none"></audio>
+            <a href="#" id="downloadLink" class="btn download-btn">
+                <i class="bi bi-download"></i>
+                Download MP3
+            </a>
+        </section>
+    </section>
+
+    <textarea id="textInput" class="d-none"></textarea>
+    <input type="hidden" id="manualTitle">
+</section>
+{% endblock %}

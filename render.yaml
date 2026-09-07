@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: book2voice
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn "backend.app:create_app()"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: APP_DATA_DIR
+        value: /tmp/book2voice
+
