@@ -17,6 +17,17 @@ Open:
 
 `http://127.0.0.1:5000`
 
+## Deploy on Render
+
+The project includes a ready-to-use `render.yaml` file. It uses Gunicorn, binds to Render's assigned `$PORT`, has a `/health` readiness check, and deploys automatically after future pushes to the `main` branch.
+
+1. In Render, select **New > Blueprint**.
+2. Connect the GitHub repository `Bhushand007/book2voice`.
+3. Select the `main` branch and deploy the detected `render.yaml` file.
+4. Wait until the Render deploy log reports the `/health` check is passing, then open the generated `onrender.com` URL.
+
+The free Render plan uses temporary local storage. Uploaded PDFs, generated MP3 files, and the SQLite database are cleared when Render restarts or redeploys. The conversion workflow works normally while the service is running. Use a Render Postgres database and persistent disk on a paid plan if you need saved audio and history to survive restarts.
+
 ## Temporary 24 Hour Live Link
 
 Run this while the laptop is awake and connected to the internet:
