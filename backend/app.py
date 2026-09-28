@@ -14,6 +14,7 @@ if str(PROJECT_ROOT) not in sys.path:
 from backend.config import Config
 from backend.extensions import db
 from backend.routes import main_bp
+from backend.routes.admin import admin_bp
 from backend.services.stats_service import StatsService
 
 
@@ -46,6 +47,7 @@ def create_app() -> Flask:
 
     db.init_app(app)
     app.register_blueprint(main_bp)
+    app.register_blueprint(admin_bp)
 
     for folder in (Config.UPLOAD_FOLDER, Config.AUDIO_FOLDER, Config.LOG_FOLDER):
         folder.mkdir(parents=True, exist_ok=True)
